@@ -1,7 +1,21 @@
+const Course = require('../models/Course');
+
 class SiteController {
-    //[GET] 
+    //[GET]
     index(req, res) {
-        res.render('home');
+        // Course.find({}, function(err, courses) {
+        //     if (!err) res.jon(courses);
+        //     res.status(400).json({ error: 'ERROR!!!' }); 
+        // });
+        // res.render('home');
+        Course.find({}, function(err, courses) {
+            if(!err) {
+                res.json(courses);
+            } else {
+                res.status(400).json({ error: 'ERROR!!!'});
+            }
+            
+        });
     }
 
     //[GET] /search
@@ -10,4 +24,4 @@ class SiteController {
     }
 }
 
-module.exports = new SiteController;    
+module.exports = new SiteController();
